@@ -15,7 +15,7 @@ app.use(cors({
 }))
 
 
-app.use(express.static(path.join(__dirname, 'dist/client/browser')));
+// app.use(express.static(path.join(__dirname, 'dist/client/browser')));
 
 
 app.use(cookieParser())
@@ -25,9 +25,9 @@ app.use("/api/v1/type", protectedRoute, require("./routes/type.routes"))
 app.use("/api/v1/expense", protectedRoute, require("./routes/expense.routes"))
 
 app.use("*", (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'dist/client/browser/index.html'));
-    // res.status(404).json({ message: "Resource Not Found" })
-    // next()
+    // res.sendFile(path.join(__dirname, 'dist/client/browser/index.html'));
+    res.status(404).json({ message: "Resource Not Found" })
+    next()
 })
 
 app.use((err, req, res, next) => {
